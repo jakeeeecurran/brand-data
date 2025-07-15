@@ -13,263 +13,85 @@
             font-family: 'Inter', sans-serif;
         }
 
-        .parallax-bg {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #ffd700 50%, #ffa500 75%, #ff8c00 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .dashboard-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .dashboard-section {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .dashboard-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        .section-title {
+        .bg-gradient {
             background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            text-align: center;
         }
 
-        .brand-completion-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .region-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .region-title {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .location-title {
-            color: #374151;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            text-align: center;
-        }
-
-        .brand-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 0.75rem;
-        }
-
-        .brand-card {
-            padding: 0.75rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .brand-card.completed {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-            transform: scale(1.05);
-        }
-
-        .brand-card.completed:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
-        }
-
-        .brand-card.pending {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-        }
-
-        .brand-card.pending:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
-        }
-
-        .brand-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .brand-card:hover::before {
-            left: 100%;
-        }
-
-        .completion-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ff6b35;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
         }
 
         .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border: none;
             text-decoration: none;
             display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.9rem;
+            font-size: 14px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            background: #ff6b35;
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #e55a2b 0%, #e0851a 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            background: #e55a2b;
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+            background: #6b7280;
             color: white;
         }
 
         .btn-secondary:hover {
-            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
-            transform: translateY(-2px);
+            background: #4b5563;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
         }
 
         .form-select {
-            padding: 0.75rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
         }
 
         .form-select:focus {
             outline: none;
             border-color: #ff6b35;
-            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
-        }
-
-        .chart-container {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            margin-bottom: 1.5rem;
-        }
-
-        .chart-title {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
+            box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.1);
         }
 
         .data-table {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 16px;
+            background: white;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
         }
 
         .data-table table {
@@ -278,43 +100,128 @@
         }
 
         .data-table th, .data-table td {
-            padding: 1rem;
+            padding: 12px;
             text-align: left;
             border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
         }
 
         .data-table th {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            background: #ff6b35;
             color: white;
             font-weight: 600;
         }
 
         .data-table tr:hover {
-            background-color: rgba(255, 107, 53, 0.05);
+            background-color: #f9fafb;
         }
 
-        .floating-header {
-            animation: float 6s ease-in-out infinite;
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .brand-card {
+            padding: 8px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 12px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .brand-card.completed {
+            background: #10b981;
+            color: white;
+        }
+
+        .brand-card.pending {
+            background: #ef4444;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 24px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
         }
 
         .filter-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .compact-table {
+            font-size: 12px;
+        }
+
+        .compact-table th, .compact-table td {
+            padding: 8px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 4px;
+        }
+
+        .action-btn {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
         }
     </style>
 </head>
-<body class="parallax-bg min-h-screen">
-    <div class="dashboard-container">
-        <div class="flex justify-between items-center mb-8 floating-header">
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-7xl mx-auto p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
             <div>
-                <h1 class="text-4xl font-bold text-white mb-2">Sunco Motors</h1>
-                <p class="text-xl text-white opacity-90">Data Dashboard</p>
+                <h1 class="text-2xl font-bold text-gray-900">Sunco Motors Dashboard</h1>
+                <p class="text-gray-600">Data Management & Analytics</p>
             </div>
             <a href="index.html" class="btn btn-primary">
                 📝 Back to Form
@@ -322,16 +229,16 @@
         </div>
 
         <!-- Brand Completion Status -->
-        <div class="dashboard-section">
-            <h2 class="section-title">🎯 Brand Completion Status - Current Month</h2>
+        <div class="card p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Brand Completion Status - Current Month</h2>
             <div id="brandCompletionStatus">
                 <!-- Will be populated by JavaScript -->
             </div>
         </div>
 
         <!-- Filters -->
-        <div class="dashboard-section">
-            <h2 class="section-title">🔍 Data Filters</h2>
+        <div class="card p-6 mb-6">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Filters</h2>
             <div class="filter-grid">
                 <div>
                     <label class="block text-sm font-medium mb-2 text-gray-700">Month</label>
@@ -359,29 +266,29 @@
                 </div>
             </div>
             <div class="mt-4">
-                <button id="clearFilters" class="btn btn-secondary">Clear All Filters</button>
+                <button id="clearFilters" class="btn btn-secondary">Clear Filters</button>
             </div>
         </div>
 
         <!-- Charts -->
-        <div class="grid-2">
-            <div class="chart-container">
-                <h3 class="chart-title">📊 Entries by Brand</h3>
+        <div class="grid-2 mb-6">
+            <div class="card p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Entries by Brand</h3>
                 <canvas id="brandChart" width="400" height="200"></canvas>
             </div>
-            <div class="chart-container">
-                <h3 class="chart-title">📈 Entries by Month</h3>
+            <div class="card p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Entries by Month</h3>
                 <canvas id="monthChart" width="400" height="200"></canvas>
             </div>
         </div>
 
         <!-- Data Table -->
         <div class="data-table">
-            <div class="p-6 border-b border-gray-200">
-                <h3 class="text-xl font-semibold text-gray-800">📋 All Data</h3>
+            <div class="p-4 border-b border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-900">Data Entries</h3>
                 <p id="tableInfo" class="text-sm text-gray-600 mt-1">Showing all entries</p>
             </div>
-            <table>
+            <table class="compact-table">
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -390,13 +297,10 @@
                         <th>Brand</th>
                         <th>Stock #</th>
                         <th>Model</th>
-                        <th>Spec</th>
-                        <th>Build</th>
-                        <th>Compliance</th>
                         <th>Was Price</th>
                         <th>Now Price</th>
                         <th>Savings</th>
-                        <th>Features</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="dashboardTableBody">
@@ -405,10 +309,104 @@
         </div>
     </div>
 
+    <!-- View Modal -->
+    <div id="viewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('viewModal')">&times;</span>
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Entry Details</h2>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editModal')">&times;</span>
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Edit Entry</h2>
+            <form id="editForm">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Date</label>
+                        <input type="date" id="editDate" class="form-select w-full" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Region</label>
+                        <select id="editRegion" class="form-select w-full" required>
+                            <option value="Sunshine Coast">Sunshine Coast</option>
+                            <option value="Kingaroy">Kingaroy</option>
+                            <option value="Hervey Bay">Hervey Bay</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Location</label>
+                        <select id="editLocation" class="form-select w-full">
+                            <option value="">Select Location</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Brand</label>
+                        <select id="editBrand" class="form-select w-full" required>
+                            <option value="">Select Brand</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Stock Number</label>
+                        <input type="text" id="editStockNumber" class="form-select w-full" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Model</label>
+                        <input type="text" id="editModel" class="form-select w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Spec</label>
+                        <input type="text" id="editSpec" class="form-select w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Build</label>
+                        <input type="text" id="editBuild" class="form-select w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Compliance</label>
+                        <input type="text" id="editCompliance" class="form-select w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Was Price</label>
+                        <input type="number" id="editWasPrice" class="form-select w-full" step="0.01" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Now Price</label>
+                        <input type="number" id="editNowPrice" class="form-select w-full" step="0.01" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Feature 1</label>
+                        <input type="text" id="editFeature1" class="form-select w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Feature 2</label>
+                        <input type="text" id="editFeature2" class="form-select w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Feature 3</label>
+                        <input type="text" id="editFeature3" class="form-select w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2 text-gray-700">Feature 4</label>
+                        <input type="text" id="editFeature4" class="form-select w-full">
+                    </div>
+                </div>
+                <div class="mt-6 flex gap-3">
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                    <button type="button" onclick="closeModal('editModal')" class="btn btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         let allData = [];
         let filteredData = [];
         let brandChart, monthChart;
+        let editingIndex = -1;
 
         // Load data on page load
         document.addEventListener('DOMContentLoaded', function() {
@@ -416,6 +414,7 @@
             updateDashboard();
             setupFilters();
             createCharts();
+            setupEditForm();
         });
 
         function loadData() {
@@ -433,13 +432,11 @@
             const currentMonth = new Date().getMonth();
             const currentYear = new Date().getFullYear();
             
-            // Get current month data
             const currentMonthData = allData.filter(item => {
                 const itemDate = new Date(item.date);
                 return itemDate.getMonth() === currentMonth && itemDate.getFullYear() === currentYear;
             });
 
-            // Define all possible brands by region/location
             const allBrands = {
                 'Sunshine Coast': {
                     'Maroochydore': ['Audi', 'Volvo', 'MG', 'LDV', 'Cupra', 'Hyundai', 'Nissan', 'GMSV', 'Used', 'Mahindra', 'Polaris', 'Jeep', 'IM by MG', 'Chery', 'Polestar', 'Leapmotor'],
@@ -449,13 +446,11 @@
                 'Hervey Bay': ['Nissan', 'GWM', 'Isuzu', 'Kia', 'Mahindra', 'Honda', 'Used']
             };
 
-            // Get completed brands for current month
             const completedBrands = [...new Set(currentMonthData.map(item => item.brand))];
 
             const statusContainer = document.getElementById('brandCompletionStatus');
             statusContainer.innerHTML = '';
 
-            // Add completion stats
             const totalBrands = Object.values(allBrands).reduce((total, region) => {
                 if (typeof region === 'object' && !Array.isArray(region)) {
                     return total + Object.values(region).reduce((sum, brands) => sum + brands.length, 0);
@@ -466,40 +461,37 @@
             const completionRate = totalBrands > 0 ? (completedBrands.length / totalBrands * 100).toFixed(1) : 0;
 
             const statsHtml = `
-                <div class="completion-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">${completedBrands.length}</div>
-                        <div class="stat-label">Completed</div>
+                <div class="grid grid-cols-3 gap-4 mb-4">
+                    <div class="text-center p-3 bg-green-50 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600">${completedBrands.length}</div>
+                        <div class="text-sm text-gray-600">Completed</div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">${totalBrands - completedBrands.length}</div>
-                        <div class="stat-label">Pending</div>
+                    <div class="text-center p-3 bg-red-50 rounded-lg">
+                        <div class="text-2xl font-bold text-red-600">${totalBrands - completedBrands.length}</div>
+                        <div class="text-sm text-gray-600">Pending</div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">${completionRate}%</div>
-                        <div class="stat-label">Completion Rate</div>
+                    <div class="text-center p-3 bg-blue-50 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600">${completionRate}%</div>
+                        <div class="text-sm text-gray-600">Completion Rate</div>
                     </div>
                 </div>
             `;
             statusContainer.innerHTML = statsHtml;
 
-            // Create brand completion grid
             const completionGrid = document.createElement('div');
             completionGrid.className = 'brand-completion-grid';
 
-            // Create sections for each region
             Object.keys(allBrands).forEach(region => {
                 const regionCard = document.createElement('div');
-                regionCard.className = 'region-card';
-                regionCard.innerHTML = `<h3 class="region-title">${region}</h3>`;
+                regionCard.className = 'card p-4';
+                regionCard.innerHTML = `<h3 class="font-semibold text-gray-900 mb-3">${region}</h3>`;
 
                 if (typeof allBrands[region] === 'object' && !Array.isArray(allBrands[region])) {
-                    // Sunshine Coast with locations
                     Object.keys(allBrands[region]).forEach(location => {
                         const locationBrands = allBrands[region][location];
                         const locationSection = document.createElement('div');
-                        locationSection.className = 'mb-4';
-                        locationSection.innerHTML = `<h4 class="location-title">${location}</h4>`;
+                        locationSection.className = 'mb-3';
+                        locationSection.innerHTML = `<h4 class="text-sm font-medium text-gray-700 mb-2">${location}</h4>`;
                         
                         const brandsGrid = document.createElement('div');
                         brandsGrid.className = 'brand-grid';
@@ -516,7 +508,6 @@
                         regionCard.appendChild(locationSection);
                     });
                 } else {
-                    // Other regions (Kingaroy, Hervey Bay)
                     const brandsGrid = document.createElement('div');
                     brandsGrid.className = 'brand-grid';
                     
@@ -552,7 +543,6 @@
             populateSelect('regionFilter', regions);
             populateSelect('locationFilter', locations);
 
-            // Add event listeners
             document.getElementById('monthFilter').addEventListener('change', applyFilters);
             document.getElementById('brandFilter').addEventListener('change', applyFilters);
             document.getElementById('regionFilter').addEventListener('change', applyFilters);
@@ -607,13 +597,11 @@
             tbody.innerHTML = '';
             tableInfo.textContent = `Showing ${filteredData.length} of ${allData.length} entries`;
 
-            filteredData.forEach(item => {
+            filteredData.forEach((item, index) => {
                 const row = document.createElement('tr');
                 const wasPrice = parseFloat(item.wasPrice) || 0;
                 const nowPrice = parseFloat(item.nowPrice) || 0;
                 const savings = wasPrice - nowPrice;
-                const features = [item.feature1, item.feature2, item.feature3, item.feature4]
-                    .filter(f => f).join(', ');
 
                 row.innerHTML = `
                     <td>${item.date}</td>
@@ -622,20 +610,184 @@
                     <td>${item.brand}</td>
                     <td>${item.stockNumber}</td>
                     <td>${item.model || '-'}</td>
-                    <td>${item.spec || '-'}</td>
-                    <td>${item.build || '-'}</td>
-                    <td>${item.compliance || '-'}</td>
                     <td>$${wasPrice.toFixed(2)}</td>
                     <td>$${nowPrice.toFixed(2)}</td>
                     <td class="${savings > 0 ? 'text-green-600 font-semibold' : 'text-gray-600'}">$${savings.toFixed(2)}</td>
-                    <td>${features || '-'}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button onclick="viewEntry(${index})" class="action-btn btn-primary">View</button>
+                            <button onclick="editEntry(${index})" class="action-btn btn-success">Edit</button>
+                            <button onclick="deleteEntry(${index})" class="action-btn btn-danger">Delete</button>
+                        </div>
+                    </td>
                 `;
                 tbody.appendChild(row);
             });
         }
 
+        function viewEntry(index) {
+            const item = filteredData[index];
+            const wasPrice = parseFloat(item.wasPrice) || 0;
+            const nowPrice = parseFloat(item.nowPrice) || 0;
+            const savings = wasPrice - nowPrice;
+            const features = [item.feature1, item.feature2, item.feature3, item.feature4]
+                .filter(f => f).join(', ');
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="grid grid-cols-2 gap-4">
+                    <div><strong>Date:</strong> ${item.date}</div>
+                    <div><strong>Region:</strong> ${item.region}</div>
+                    <div><strong>Location:</strong> ${item.location || '-'}</div>
+                    <div><strong>Brand:</strong> ${item.brand}</div>
+                    <div><strong>Stock Number:</strong> ${item.stockNumber}</div>
+                    <div><strong>Model:</strong> ${item.model || '-'}</div>
+                    <div><strong>Spec:</strong> ${item.spec || '-'}</div>
+                    <div><strong>Build:</strong> ${item.build || '-'}</div>
+                    <div><strong>Compliance:</strong> ${item.compliance || '-'}</div>
+                    <div><strong>Was Price:</strong> $${wasPrice.toFixed(2)}</div>
+                    <div><strong>Now Price:</strong> $${nowPrice.toFixed(2)}</div>
+                    <div><strong>Savings:</strong> <span class="${savings > 0 ? 'text-green-600 font-semibold' : 'text-gray-600'}">$${savings.toFixed(2)}</span></div>
+                    <div><strong>Features:</strong> ${features || '-'}</div>
+                </div>
+            `;
+
+            document.getElementById('viewModal').style.display = 'block';
+        }
+
+        function editEntry(index) {
+            editingIndex = allData.indexOf(filteredData[index]);
+            const item = filteredData[index];
+
+            document.getElementById('editDate').value = item.date;
+            document.getElementById('editRegion').value = item.region;
+            document.getElementById('editLocation').value = item.location || '';
+            document.getElementById('editBrand').value = item.brand;
+            document.getElementById('editStockNumber').value = item.stockNumber;
+            document.getElementById('editModel').value = item.model || '';
+            document.getElementById('editSpec').value = item.spec || '';
+            document.getElementById('editBuild').value = item.build || '';
+            document.getElementById('editCompliance').value = item.compliance || '';
+            document.getElementById('editWasPrice').value = item.wasPrice;
+            document.getElementById('editNowPrice').value = item.nowPrice;
+            document.getElementById('editFeature1').value = item.feature1 || '';
+            document.getElementById('editFeature2').value = item.feature2 || '';
+            document.getElementById('editFeature3').value = item.feature3 || '';
+            document.getElementById('editFeature4').value = item.feature4 || '';
+
+            updateLocationOptions(item.region);
+            updateBrandOptions(item.region, item.location);
+
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        function deleteEntry(index) {
+            if (confirm('Are you sure you want to delete this entry?')) {
+                const itemToDelete = filteredData[index];
+                const actualIndex = allData.indexOf(itemToDelete);
+                
+                if (actualIndex > -1) {
+                    allData.splice(actualIndex, 1);
+                    localStorage.setItem('dealershipData', JSON.stringify(allData));
+                    loadData();
+                    updateDashboard();
+                }
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            editingIndex = -1;
+        }
+
+        function setupEditForm() {
+            document.getElementById('editForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (editingIndex > -1) {
+                    const updatedItem = {
+                        date: document.getElementById('editDate').value,
+                        region: document.getElementById('editRegion').value,
+                        location: document.getElementById('editLocation').value,
+                        brand: document.getElementById('editBrand').value,
+                        stockNumber: document.getElementById('editStockNumber').value,
+                        model: document.getElementById('editModel').value,
+                        spec: document.getElementById('editSpec').value,
+                        build: document.getElementById('editBuild').value,
+                        compliance: document.getElementById('editCompliance').value,
+                        wasPrice: document.getElementById('editWasPrice').value,
+                        nowPrice: document.getElementById('editNowPrice').value,
+                        feature1: document.getElementById('editFeature1').value,
+                        feature2: document.getElementById('editFeature2').value,
+                        feature3: document.getElementById('editFeature3').value,
+                        feature4: document.getElementById('editFeature4').value
+                    };
+
+                    allData[editingIndex] = updatedItem;
+                    localStorage.setItem('dealershipData', JSON.stringify(allData));
+                    
+                    closeModal('editModal');
+                    loadData();
+                    updateDashboard();
+                }
+            });
+
+            document.getElementById('editRegion').addEventListener('change', function() {
+                updateLocationOptions(this.value);
+                updateBrandOptions(this.value, '');
+            });
+
+            document.getElementById('editLocation').addEventListener('change', function() {
+                updateBrandOptions(document.getElementById('editRegion').value, this.value);
+            });
+        }
+
+        function updateLocationOptions(region) {
+            const locationSelect = document.getElementById('editLocation');
+            locationSelect.innerHTML = '<option value="">Select Location</option>';
+            
+            if (region === 'Sunshine Coast') {
+                ['Maroochydore', 'Caloundra'].forEach(location => {
+                    const option = document.createElement('option');
+                    option.value = location;
+                    option.textContent = location;
+                    locationSelect.appendChild(option);
+                });
+            }
+        }
+
+        function updateBrandOptions(region, location) {
+            const brandSelect = document.getElementById('editBrand');
+            brandSelect.innerHTML = '<option value="">Select Brand</option>';
+            
+            const brands = getBrandsForRegion(region, location);
+            brands.forEach(brand => {
+                const option = document.createElement('option');
+                option.value = brand;
+                option.textContent = brand;
+                brandSelect.appendChild(option);
+            });
+        }
+
+        function getBrandsForRegion(region, location) {
+            const brandMap = {
+                'Sunshine Coast': {
+                    'Maroochydore': ['Audi', 'Volvo', 'MG', 'LDV', 'Cupra', 'Hyundai', 'Nissan', 'GMSV', 'Used', 'Mahindra', 'Polaris', 'Jeep', 'IM by MG', 'Chery', 'Polestar', 'Leapmotor'],
+                    'Caloundra': ['Hyundai', 'Nissan', 'LDV', 'MG', 'Chery', 'Used']
+                },
+                'Kingaroy': ['Ford', 'Hyundai', 'Nissan', 'GWM', 'Mitsubishi', 'Used'],
+                'Hervey Bay': ['Nissan', 'GWM', 'Isuzu', 'Kia', 'Mahindra', 'Honda', 'Used']
+            };
+
+            if (region === 'Sunshine Coast' && location) {
+                return brandMap[region][location] || [];
+            } else if (brandMap[region]) {
+                return Array.isArray(brandMap[region]) ? brandMap[region] : [];
+            }
+            return [];
+        }
+
         function createCharts() {
-            // Brand Chart
             const brandCtx = document.getElementById('brandChart').getContext('2d');
             brandChart = new Chart(brandCtx, {
                 type: 'bar',
@@ -646,8 +798,8 @@
                         data: [],
                         backgroundColor: 'rgba(255, 107, 53, 0.8)',
                         borderColor: 'rgba(255, 107, 53, 1)',
-                        borderWidth: 2,
-                        borderRadius: 8
+                        borderWidth: 1,
+                        borderRadius: 4
                     }]
                 },
                 options: {
@@ -684,7 +836,6 @@
                 }
             });
 
-            // Month Chart
             const monthCtx = document.getElementById('monthChart').getContext('2d');
             monthChart = new Chart(monthCtx, {
                 type: 'line',
@@ -695,7 +846,7 @@
                         data: [],
                         borderColor: 'rgba(255, 107, 53, 1)',
                         backgroundColor: 'rgba(255, 107, 53, 0.1)',
-                        borderWidth: 3,
+                        borderWidth: 2,
                         fill: true,
                         tension: 0.4
                     }]
@@ -736,7 +887,6 @@
         }
 
         function updateCharts() {
-            // Update Brand Chart
             const brandData = {};
             filteredData.forEach(item => {
                 brandData[item.brand] = (brandData[item.brand] || 0) + 1;
@@ -746,7 +896,6 @@
             brandChart.data.datasets[0].data = Object.values(brandData);
             brandChart.update();
 
-            // Update Month Chart
             const monthData = {};
             filteredData.forEach(item => {
                 const date = new Date(item.date);
@@ -760,7 +909,19 @@
             monthChart.update();
         }
 
-        // Refresh data when page becomes visible (in case data was added from another tab)
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const viewModal = document.getElementById('viewModal');
+            const editModal = document.getElementById('editModal');
+            if (event.target === viewModal) {
+                closeModal('viewModal');
+            }
+            if (event.target === editModal) {
+                closeModal('editModal');
+            }
+        }
+
+        // Refresh data when page becomes visible
         document.addEventListener('visibilitychange', function() {
             if (!document.hidden) {
                 loadData();

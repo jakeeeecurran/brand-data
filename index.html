@@ -12,131 +12,103 @@
             font-family: 'Inter', sans-serif;
         }
 
-        .gradient-bg {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #ffd700 50%, #ffa500 75%, #ff8c00 100%);
+        .bg-gradient {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
         }
 
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
         }
 
         .form-container {
-            max-width: 1400px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .main-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        .form-column {
-            display: flex;
-            flex-direction: column;
+            padding: 24px;
         }
 
         .form-section {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .form-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .form-label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: #1f2937;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 14px;
         }
 
         .form-input, .form-select, .form-textarea {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            background: white;
         }
 
         .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
             border-color: #ff6b35;
-            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
-            transform: translateY(-2px);
+            box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.1);
         }
 
         .btn {
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border: none;
             text-decoration: none;
             display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.9rem;
+            font-size: 14px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            background: #ff6b35;
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #e55a2b 0%, #e0851a 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            background: #e55a2b;
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+            background: #6b7280;
             color: white;
         }
 
         .btn-secondary:hover {
-            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
-            transform: translateY(-2px);
+            background: #4b5563;
         }
 
         .btn-success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: #10b981;
             color: white;
         }
 
         .btn-success:hover {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            transform: translateY(-2px);
+            background: #059669;
         }
 
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 12px;
         }
 
         @media (min-width: 640px) {
@@ -146,342 +118,194 @@
         }
 
         .success-message {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            background: #d1fae5;
             color: #065f46;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 1rem;
             text-align: center;
             border: 1px solid #10b981;
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .section-title {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.5rem;
-            font-weight: 700;
+            color: #ff6b35;
+            font-size: 18px;
+            font-weight: 600;
             margin-bottom: 1rem;
             text-align: center;
-        }
-
-        /* Radio Ad Preview Styles */
-        .preview-container {
-            position: sticky;
-            top: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            min-height: 600px;
-        }
-
-        .preview-title {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .radio-ad-preview {
-            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-            border-radius: 16px;
-            padding: 30px;
-            color: white;
-            font-family: 'Georgia', serif;
-            line-height: 1.6;
-            min-height: 500px;
-            position: relative;
-        }
-
-        .radio-ad-preview::before {
-            content: '📻';
-            position: absolute;
-            top: -15px;
-            left: 20px;
-            font-size: 2rem;
-            background: #ff6b35;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .vehicle-description {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #ffd700;
-        }
-
-        .price-section {
-            background: rgba(255, 107, 53, 0.2);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            border-left: 4px solid #ff6b35;
-        }
-
-        .was-price {
-            text-decoration: line-through;
-            color: #9ca3af;
-            font-size: 1.1rem;
-        }
-
-        .now-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #10b981;
-        }
-
-        .savings {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #ffd700;
-            margin-top: 0.5rem;
-        }
-
-        .features-list {
-            margin: 1.5rem 0;
-        }
-
-        .feature-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.75rem;
-            margin: 0.5rem 0;
-            border-radius: 6px;
-            border-left: 3px solid #ff6b35;
-        }
-
-        .call-to-action {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-top: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .preview-placeholder {
-            text-align: center;
-            color: #6b7280;
-            font-style: italic;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 1024px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-            .preview-container {
-                position: static;
-                order: -1;
-            }
         }
     </style>
 </head>
-<body class="gradient-bg min-h-screen">
+<body class="bg-gray-50 min-h-screen">
     <div class="form-container">
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-white mb-2">Sunco Motors</h1>
-            <p class="text-xl text-white opacity-90">Radio Ad Data Collection</p>
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">Sunco Motors</h1>
+            <p class="text-gray-600">Radio Ad Data Collection</p>
         </div>
 
         <div id="successMessage" class="success-message" style="display: none;">
             <div class="flex items-center justify-center">
-                <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                 </svg>
                 Form submitted successfully! Data saved locally.
             </div>
         </div>
 
-        <div class="main-layout">
-            <!-- Form Section -->
-            <div class="form-column">
-                <form id="dealershipForm" class="space-y-6">
-                    <!-- Region Selection -->
-                    <div class="form-section">
-                        <h2 class="section-title">📍 Dealership Region</h2>
-                        <div class="form-group">
-                            <label class="form-label">Select Region</label>
-                            <select id="region" name="region" class="form-select" required>
-                                <option value="">Choose your region...</option>
-                                <option value="Sunshine Coast">Sunshine Coast</option>
-                                <option value="Kingaroy">Kingaroy</option>
-                                <option value="Hervey Bay">Hervey Bay</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Location Selection (if Sunshine Coast) -->
-                    <div id="locationGroup" class="form-section" style="display: none;">
-                        <h2 class="section-title">🏢 Location</h2>
-                        <div class="form-group">
-                            <label class="form-label">Select Location</label>
-                            <select id="location" name="location" class="form-select">
-                                <option value="">Choose your location...</option>
-                                <option value="Maroochydore">Maroochydore</option>
-                                <option value="Caloundra">Caloundra</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Brand Selection -->
-                    <div id="brandGroup" class="form-section" style="display: none;">
-                        <h2 class="section-title">🚗 Brand Selection</h2>
-                        <div class="form-group">
-                            <label class="form-label">Select Brand</label>
-                            <select id="brand" name="brand" class="form-select" required>
-                                <option value="">Choose your brand...</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Vehicle Details -->
-                    <div id="vehicleDetails" style="display: none;">
-                        <div class="form-section">
-                            <h2 class="section-title">📋 Vehicle Information</h2>
-                            
-                            <div class="form-group">
-                                <label class="form-label">Brand</label>
-                                <input type="text" name="brandInput" id="brandInput" class="form-input" readonly style="background-color: #f9fafb;">
-                            </div>
-
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label class="form-label">Model</label>
-                                    <input type="text" name="model" id="model" class="form-input" required placeholder="e.g., Tucson, i30" oninput="updatePreview()">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Spec</label>
-                                    <input type="text" name="spec" id="spec" class="form-input" required placeholder="e.g., Elite, Premium" oninput="updatePreview()">
-                                </div>
-                            </div>
-
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label class="form-label">Build</label>
-                                    <input type="text" name="build" id="build" class="form-input" required placeholder="e.g., 2024" oninput="updatePreview()">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Compliance</label>
-                                    <input type="text" name="compliance" id="compliance" class="form-input" required placeholder="e.g., ADR 79/04" oninput="updatePreview()">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Stock Number</label>
-                                <input type="text" name="stockNumber" id="stockNumber" class="form-input" required placeholder="e.g., SM12345" oninput="updatePreview()">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Kilometres</label>
-                                <input type="number" name="kilometres" id="kilometres" class="form-input" required placeholder="e.g., 15000" oninput="updatePreview()">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Time in Stock</label>
-                                <input type="text" name="timeInStock" id="timeInStock" class="form-input" required placeholder="e.g., 2 weeks" oninput="updatePreview()">
-                            </div>
-                        </div>
-
-                        <!-- Features Section -->
-                        <div class="form-section">
-                            <h2 class="section-title">⭐ Key Features</h2>
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label class="form-label">Feature 1</label>
-                                    <input type="text" name="feature1" id="feature1" class="form-input" placeholder="e.g., Apple CarPlay" oninput="updatePreview()">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Feature 2</label>
-                                    <input type="text" name="feature2" id="feature2" class="form-input" placeholder="e.g., Safety Package" oninput="updatePreview()">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Feature 3</label>
-                                    <input type="text" name="feature3" id="feature3" class="form-input" placeholder="e.g., Leather Interior" oninput="updatePreview()">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Feature 4</label>
-                                    <input type="text" name="feature4" id="feature4" class="form-input" placeholder="e.g., Panoramic Sunroof" oninput="updatePreview()">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pricing Section -->
-                        <div class="form-section">
-                            <h2 class="section-title">💰 Pricing Information</h2>
-                            <div class="grid-2">
-                                <div class="form-group">
-                                    <label class="form-label">Was Price</label>
-                                    <input type="text" name="wasPrice" id="wasPrice" class="form-input" oninput="calculateSavings()" placeholder="e.g., $45,000">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Now Price</label>
-                                    <input type="text" name="nowPrice" id="nowPrice" class="form-input" oninput="calculateSavings()" placeholder="e.g., $42,000">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Savings</label>
-                                <input type="text" id="savings" class="form-input" readonly style="background-color: #f9fafb; font-weight: 600; color: #059669;">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Call to Action / ARMS</label>
-                                <textarea name="callToAction" id="callToAction" class="form-textarea" rows="3" placeholder="e.g., Call now for a test drive! Limited time offer." oninput="updatePreview()"></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary w-full text-lg py-4">
-                                🚀 Submit Radio Ad Data
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <!-- Data Management Section -->
-                <div class="form-section">
-                    <h2 class="section-title">📊 Data Management</h2>
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <button id="exportBtn" class="btn btn-success flex-1">
-                            📥 Export to CSV
-                        </button>
-                        <button id="clearBtn" class="btn btn-secondary flex-1">
-                            🗑️ Clear All Data
-                        </button>
-                        <a href="dashboard.html" class="btn btn-primary flex-1 text-center">
-                            📈 View Dashboard
-                        </a>
-                    </div>
+        <form id="dealershipForm" class="space-y-6">
+            <!-- Region Selection -->
+            <div class="form-section">
+                <h2 class="section-title">Dealership Region</h2>
+                <div class="form-group">
+                    <label class="form-label">Select Region</label>
+                    <select id="region" name="region" class="form-select" required>
+                        <option value="">Choose your region...</option>
+                        <option value="Sunshine Coast">Sunshine Coast</option>
+                        <option value="Kingaroy">Kingaroy</option>
+                        <option value="Hervey Bay">Hervey Bay</option>
+                    </select>
                 </div>
             </div>
 
-            <!-- Preview Section -->
-            <div class="preview-container">
-                <h2 class="preview-title">📻 Radio Ad Preview</h2>
-                <div class="radio-ad-preview" id="radioAdPreview">
-                    <div class="preview-placeholder">
-                        Fill out the form to see your radio ad preview here...
+            <!-- Location Selection (if Sunshine Coast) -->
+            <div id="locationGroup" class="form-section" style="display: none;">
+                <h2 class="section-title">Location</h2>
+                <div class="form-group">
+                    <label class="form-label">Select Location</label>
+                    <select id="location" name="location" class="form-select">
+                        <option value="">Choose your location...</option>
+                        <option value="Maroochydore">Maroochydore</option>
+                        <option value="Caloundra">Caloundra</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Brand Selection -->
+            <div id="brandGroup" class="form-section" style="display: none;">
+                <h2 class="section-title">Brand Selection</h2>
+                <div class="form-group">
+                    <label class="form-label">Select Brand</label>
+                    <select id="brand" name="brand" class="form-select" required>
+                        <option value="">Choose your brand...</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Vehicle Details -->
+            <div id="vehicleDetails" style="display: none;">
+                <div class="form-section">
+                    <h2 class="section-title">Vehicle Information</h2>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Brand</label>
+                        <input type="text" name="brandInput" id="brandInput" class="form-input" readonly style="background-color: #f9fafb;">
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Model</label>
+                            <input type="text" name="model" id="model" class="form-input" required placeholder="e.g., Tucson, i30">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Spec</label>
+                            <input type="text" name="spec" id="spec" class="form-input" required placeholder="e.g., Elite, Premium">
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Build</label>
+                            <input type="text" name="build" id="build" class="form-input" required placeholder="e.g., 2024">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Compliance</label>
+                            <input type="text" name="compliance" id="compliance" class="form-input" required placeholder="e.g., ADR 79/04">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Stock Number</label>
+                        <input type="text" name="stockNumber" id="stockNumber" class="form-input" required placeholder="e.g., SM12345">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Kilometres</label>
+                        <input type="number" name="kilometres" id="kilometres" class="form-input" required placeholder="e.g., 15000">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Time in Stock</label>
+                        <input type="text" name="timeInStock" id="timeInStock" class="form-input" required placeholder="e.g., 2 weeks">
                     </div>
                 </div>
+
+                <!-- Features Section -->
+                <div class="form-section">
+                    <h2 class="section-title">Key Features</h2>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Feature 1</label>
+                            <input type="text" name="feature1" id="feature1" class="form-input" placeholder="e.g., Apple CarPlay">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Feature 2</label>
+                            <input type="text" name="feature2" id="feature2" class="form-input" placeholder="e.g., Safety Package">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Feature 3</label>
+                            <input type="text" name="feature3" id="feature3" class="form-input" placeholder="e.g., Leather Interior">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Feature 4</label>
+                            <input type="text" name="feature4" id="feature4" class="form-input" placeholder="e.g., Panoramic Sunroof">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Section -->
+                <div class="form-section">
+                    <h2 class="section-title">Pricing Information</h2>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Was Price</label>
+                            <input type="text" name="wasPrice" id="wasPrice" class="form-input" oninput="calculateSavings()" placeholder="e.g., $45,000">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Now Price</label>
+                            <input type="text" name="nowPrice" id="nowPrice" class="form-input" oninput="calculateSavings()" placeholder="e.g., $42,000">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Savings</label>
+                        <input type="text" id="savings" class="form-input" readonly style="background-color: #f9fafb; font-weight: 600; color: #059669;">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Call to Action / ARMS</label>
+                        <textarea name="callToAction" id="callToAction" class="form-textarea" rows="3" placeholder="e.g., Call now for a test drive! Limited time offer."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-full text-base py-3">
+                        Submit Radio Ad Data
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Data Management Section -->
+        <div class="form-section">
+            <h2 class="section-title">Data Management</h2>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button id="exportBtn" class="btn btn-success flex-1">
+                    Export to CSV
+                </button>
+                <button id="clearBtn" class="btn btn-secondary flex-1">
+                    Clear All Data
+                </button>
+                <a href="dashboard.html" class="btn btn-primary flex-1 text-center">
+                    View Dashboard
+                </a>
             </div>
         </div>
     </div>
@@ -510,7 +334,6 @@
         const nowPriceInput = document.getElementById('nowPrice');
         const savingsInput = document.getElementById('savings');
         const brandInput = document.getElementById('brandInput');
-        const radioAdPreview = document.getElementById('radioAdPreview');
 
         // Event listeners
         regionSelect.addEventListener('change', handleRegionChange);
@@ -558,7 +381,6 @@
             if (brandSelect.value) {
                 brandInput.value = brandSelect.value;
                 vehicleDetails.style.display = 'block';
-                updatePreview();
             } else {
                 brandInput.value = '';
                 vehicleDetails.style.display = 'none';
@@ -575,54 +397,6 @@
                 brandSelect.appendChild(option);
             });
             brandGroup.style.display = 'block';
-        }
-
-        function updatePreview() {
-            const brand = document.getElementById('brandInput').value;
-            const model = document.getElementById('model').value;
-            const spec = document.getElementById('spec').value;
-            const build = document.getElementById('build').value;
-            const wasPrice = document.getElementById('wasPrice').value;
-            const nowPrice = document.getElementById('nowPrice').value;
-            const savings = document.getElementById('savings').value;
-            const feature1 = document.getElementById('feature1').value;
-            const feature2 = document.getElementById('feature2').value;
-            const feature3 = document.getElementById('feature3').value;
-            const feature4 = document.getElementById('feature4').value;
-            const callToAction = document.getElementById('callToAction').value;
-
-            if (!brand || !model) {
-                radioAdPreview.innerHTML = '<div class="preview-placeholder">Fill out the form to see your radio ad preview here...</div>';
-                return;
-            }
-
-            const vehicleDescription = `${brand} ${model} ${spec} ${build}`.trim();
-            
-            let featuresHtml = '';
-            const features = [feature1, feature2, feature3, feature4].filter(f => f);
-            if (features.length > 0) {
-                featuresHtml = '<div class="features-list">';
-                features.forEach(feature => {
-                    featuresHtml += `<div class="feature-item">• ${feature}</div>`;
-                });
-                featuresHtml += '</div>';
-            }
-
-            const previewHtml = `
-                <div class="vehicle-description">${vehicleDescription}</div>
-                
-                <div class="price-section">
-                    ${wasPrice ? `<div class="was-price">Was: ${wasPrice}</div>` : ''}
-                    ${nowPrice ? `<div class="now-price">Now: ${nowPrice}</div>` : ''}
-                    ${savings && savings !== '$0' ? `<div class="savings">Save: ${savings}</div>` : ''}
-                </div>
-                
-                ${featuresHtml}
-                
-                ${callToAction ? `<div class="call-to-action">${callToAction}</div>` : ''}
-            `;
-
-            radioAdPreview.innerHTML = previewHtml;
         }
 
         function handleSubmit(e) {
@@ -665,7 +439,6 @@
             locationGroup.style.display = 'none';
             brandGroup.style.display = 'none';
             vehicleDetails.style.display = 'none';
-            radioAdPreview.innerHTML = '<div class="preview-placeholder">Fill out the form to see your radio ad preview here...</div>';
         }
 
         function saveData(data) {
@@ -683,7 +456,6 @@
             const nowPrice = parseFloat(nowPriceInput.value.replace(/[$,]/g, '')) || 0;
             const savings = wasPrice - nowPrice;
             savingsInput.value = savings > 0 ? `$${savings.toLocaleString()}` : '$0';
-            updatePreview();
         }
 
         function exportToCSV() {
