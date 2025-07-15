@@ -189,12 +189,17 @@
                 <div class="grid-2">
                     <div class="form-group">
                         <label class="form-label">Was Price</label>
-                        <input type="text" name="wasPrice" class="form-input">
+                        <input type="text" name="wasPrice" id="wasPrice" class="form-input" oninput="calculateSavings()">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Now Price</label>
-                        <input type="text" name="nowPrice" class="form-input">
+                        <input type="text" name="nowPrice" id="nowPrice" class="form-input" oninput="calculateSavings()">
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Savings</label>
+                    <input type="text" id="savings" class="form-input" readonly style="background-color: #f3f4f6;">
                 </div>
 
                 <div class="form-group">
@@ -212,6 +217,7 @@
             <div class="flex flex-col sm:flex-row gap-2">
                 <button id="exportBtn" class="btn btn-success">Export to CSV</button>
                 <button id="clearBtn" class="btn btn-secondary">Clear All Data</button>
+                <a href="dashboard.html" class="btn btn-primary">View Dashboard</a>
             </div>
         </div>
 
@@ -257,6 +263,9 @@
         const clearBtn = document.getElementById('clearBtn');
         const dataTable = document.getElementById('dataTable');
         const dataTableBody = document.getElementById('dataTableBody');
+        const wasPriceInput = document.getElementById('wasPrice');
+        const nowPriceInput = document.getElementById('nowPrice');
+        const savingsInput = document.getElementById('savings');
 
         // Event listeners
         regionSelect.addEventListener('change', handleRegionChange);
@@ -265,6 +274,8 @@
         form.addEventListener('submit', handleSubmit);
         exportBtn.addEventListener('click', exportToCSV);
         clearBtn.addEventListener('click', clearAllData);
+        wasPriceInput.addEventListener('input', calculateSavings);
+        nowPriceInput.addEventListener('input', calculateSavings);
 
         // Load existing data on page load
         loadData();
@@ -449,6 +460,13 @@
                 updateDataTable();
                 alert('All data has been cleared!');
             }
+        }
+
+        function calculateSavings() {
+            const wasPrice = parseFloat(wasPriceInput.value) || 0;
+            const nowPrice = parseFloat(nowPriceInput.value) || 0;
+            const savings = wasPrice - nowPrice;
+            savingsInput.value = savings.toFixed(2);
         }
     </script>
 </body>

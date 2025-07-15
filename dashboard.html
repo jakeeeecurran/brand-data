@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealership Data Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .stats-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .filter-section {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .data-table {
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th, .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .data-table th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+        .data-table tr:hover {
+            background-color: #f9fafb;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+        .form-select {
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+        .chart-container {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="dashboard-container">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold">Dealership Data Dashboard</h1>
+            <a href="index.html" class="btn btn-primary">Back to Form</a>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="grid-3 mb-6">
+            <div class="stats-card">
+                <h3 class="text-lg font-semibold text-gray-700">Total Entries</h3>
+                <p id="totalEntries" class="text-3xl font-bold text-blue-600">0</p>
+            </div>
+            <div class="stats-card">
+                <h3 class="text-lg font-semibold text-gray-700">This Month</h3>
+                <p id="thisMonth" class="text-3xl font-bold text-green-600">0</p>
+            </div>
+            <div class="stats-card">
+                <h3 class="text-lg font-semibold text-gray-700">Total Savings</h3>
+                <p id="totalSavings" class="text-3xl font-bold text-purple-600">$0</p>
+            </div>
+            <div class="stats-card">
+                <h3 class="text-lg font-semibold text-gray-700">Avg. Savings</h3>
+                <p id="avgSavings" class="text-3xl font-bold text-orange-600">$0</p>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-section">
+            <h2 class="text-xl font-bold mb-4">Filters</h2>
+            <div class="grid-2">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Month</label>
+                    <select id="monthFilter" class="form-select w-full">
+                        <option value="">All Months</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Brand</label>
+                    <select id="brandFilter" class="form-select w-full">
+                        <option value="">All Brands</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Region</label>
+                    <select id="regionFilter" class="form-select w-full">
+                        <option value="">All Regions</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Location</label>
+                    <select id="locationFilter" class="form-select w-full">
+                        <option value="">All Locations</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4">
+                <button id="clearFilters" class="btn btn-secondary">Clear Filters</button>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid-2">
+            <div class="chart-container">
+                <h3 class="text-lg font-semibold mb-4">Entries by Brand</h3>
+                <canvas id="brandChart" width="400" height="200"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 class="text-lg font-semibold mb-4">Entries by Month</h3>
+                <canvas id="monthChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="data-table">
+            <div class="p-4 border-b">
+                <h3 class="text-lg font-semibold">All Data</h3>
+                <p id="tableInfo" class="text-sm text-gray-600">Showing all entries</p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Region</th>
+                        <th>Location</th>
+                        <th>Brand</th>
+                        <th>Stock #</th>
+                        <th>Description</th>
+                        <th>Was Price</th>
+                        <th>Now Price</th>
+                        <th>Savings</th>
+                        <th>Features</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboardTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let allData = [];
+        let filteredData = [];
+        let brandChart, monthChart;
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            updateDashboard();
+            setupFilters();
+            createCharts();
+        });
+
+        function loadData() {
+            allData = JSON.parse(localStorage.getItem('dealershipData') || '[]');
+            filteredData = [...allData];
+        }
+
+        function updateDashboard() {
+            updateStats();
+            updateTable();
+            updateCharts();
+        }
+
+        function updateStats() {
+            const totalEntries = allData.length;
+            const thisMonth = getCurrentMonthEntries();
+            const totalSavings = calculateTotalSavings();
+            const avgSavings = totalEntries > 0 ? totalSavings / totalEntries : 0;
+
+            document.getElementById('totalEntries').textContent = totalEntries;
+            document.getElementById('thisMonth').textContent = thisMonth;
+            document.getElementById('totalSavings').textContent = `$${totalSavings.toFixed(2)}`;
+            document.getElementById('avgSavings').textContent = `$${avgSavings.toFixed(2)}`;
+        }
+
+        function getCurrentMonthEntries() {
+            const currentMonth = new Date().getMonth();
+            const currentYear = new Date().getFullYear();
+            return allData.filter(item => {
+                const itemDate = new Date(item.date);
+                return itemDate.getMonth() === currentMonth && itemDate.getFullYear() === currentYear;
+            }).length;
+        }
+
+        function calculateTotalSavings() {
+            return allData.reduce((total, item) => {
+                const wasPrice = parseFloat(item.wasPrice) || 0;
+                const nowPrice = parseFloat(item.nowPrice) || 0;
+                return total + (wasPrice - nowPrice);
+            }, 0);
+        }
+
+        function setupFilters() {
+            const months = [...new Set(allData.map(item => {
+                const date = new Date(item.date);
+                return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+            }))].sort().reverse();
+
+            const brands = [...new Set(allData.map(item => item.brand))].sort();
+            const regions = [...new Set(allData.map(item => item.region))].sort();
+            const locations = [...new Set(allData.map(item => item.location).filter(loc => loc))].sort();
+
+            populateSelect('monthFilter', months);
+            populateSelect('brandFilter', brands);
+            populateSelect('regionFilter', regions);
+            populateSelect('locationFilter', locations);
+
+            // Add event listeners
+            document.getElementById('monthFilter').addEventListener('change', applyFilters);
+            document.getElementById('brandFilter').addEventListener('change', applyFilters);
+            document.getElementById('regionFilter').addEventListener('change', applyFilters);
+            document.getElementById('locationFilter').addEventListener('change', applyFilters);
+            document.getElementById('clearFilters').addEventListener('click', clearAllFilters);
+        }
+
+        function populateSelect(selectId, options) {
+            const select = document.getElementById(selectId);
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                select.appendChild(optionElement);
+            });
+        }
+
+        function applyFilters() {
+            const monthFilter = document.getElementById('monthFilter').value;
+            const brandFilter = document.getElementById('brandFilter').value;
+            const regionFilter = document.getElementById('regionFilter').value;
+            const locationFilter = document.getElementById('locationFilter').value;
+
+            filteredData = allData.filter(item => {
+                const itemDate = new Date(item.date);
+                const itemMonth = `${itemDate.getFullYear()}-${String(itemDate.getMonth() + 1).padStart(2, '0')}`;
+                
+                return (!monthFilter || itemMonth === monthFilter) &&
+                       (!brandFilter || item.brand === brandFilter) &&
+                       (!regionFilter || item.region === regionFilter) &&
+                       (!locationFilter || item.location === locationFilter);
+            });
+
+            updateTable();
+            updateCharts();
+        }
+
+        function clearAllFilters() {
+            document.getElementById('monthFilter').value = '';
+            document.getElementById('brandFilter').value = '';
+            document.getElementById('regionFilter').value = '';
+            document.getElementById('locationFilter').value = '';
+            filteredData = [...allData];
+            updateTable();
+            updateCharts();
+        }
+
+        function updateTable() {
+            const tbody = document.getElementById('dashboardTableBody');
+            const tableInfo = document.getElementById('tableInfo');
+            
+            tbody.innerHTML = '';
+            tableInfo.textContent = `Showing ${filteredData.length} of ${allData.length} entries`;
+
+            filteredData.forEach(item => {
+                const row = document.createElement('tr');
+                const wasPrice = parseFloat(item.wasPrice) || 0;
+                const nowPrice = parseFloat(item.nowPrice) || 0;
+                const savings = wasPrice - nowPrice;
+                const features = [item.feature1, item.feature2, item.feature3, item.feature4]
+                    .filter(f => f).join(', ');
+
+                row.innerHTML = `
+                    <td>${item.date}</td>
+                    <td>${item.region}</td>
+                    <td>${item.location || '-'}</td>
+                    <td>${item.brand}</td>
+                    <td>${item.stockNumber}</td>
+                    <td>${item.vehicleDescription}</td>
+                    <td>$${wasPrice.toFixed(2)}</td>
+                    <td>$${nowPrice.toFixed(2)}</td>
+                    <td class="${savings > 0 ? 'text-green-600' : 'text-gray-600'}">$${savings.toFixed(2)}</td>
+                    <td>${features || '-'}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function createCharts() {
+            // Brand Chart
+            const brandCtx = document.getElementById('brandChart').getContext('2d');
+            brandChart = new Chart(brandCtx, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Entries',
+                        data: [],
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Month Chart
+            const monthCtx = document.getElementById('monthChart').getContext('2d');
+            monthChart = new Chart(monthCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Entries',
+                        data: [],
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateCharts() {
+            // Update Brand Chart
+            const brandData = {};
+            filteredData.forEach(item => {
+                brandData[item.brand] = (brandData[item.brand] || 0) + 1;
+            });
+
+            brandChart.data.labels = Object.keys(brandData);
+            brandChart.data.datasets[0].data = Object.values(brandData);
+            brandChart.update();
+
+            // Update Month Chart
+            const monthData = {};
+            filteredData.forEach(item => {
+                const date = new Date(item.date);
+                const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                monthData[monthKey] = (monthData[monthKey] || 0) + 1;
+            });
+
+            const sortedMonths = Object.keys(monthData).sort();
+            monthChart.data.labels = sortedMonths;
+            monthChart.data.datasets[0].data = sortedMonths.map(month => monthData[month]);
+            monthChart.update();
+        }
+
+        // Refresh data when page becomes visible (in case data was added from another tab)
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                loadData();
+                updateDashboard();
+            }
+        });
+    </script>
+</body>
+</html> 
