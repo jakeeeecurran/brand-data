@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealership Radio Ad Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            border: none;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+        .btn-success {
+            background-color: #10b981;
+            color: white;
+        }
+        .btn-success:hover {
+            background-color: #059669;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        @media (min-width: 640px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .success-message {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .data-table {
+            margin-top: 2rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            overflow: hidden;
+        }
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th, .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #d1d5db;
+        }
+        .data-table th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="form-container">
+        <h1 class="text-3xl font-bold text-center mb-6">Dealership Radio Ad Data</h1>
+        
+        <div id="successMessage" class="success-message" style="display: none;">
+            Form submitted successfully! Data saved locally.
+        </div>
+
+        <form id="dealershipForm" class="space-y-4">
+            <!-- Region -->
+            <div class="form-group">
+                <label class="form-label">Dealership Region</label>
+                <select id="region" name="region" class="form-select" required>
+                    <option value="">Select region...</option>
+                    <option value="Sunshine Coast">Sunshine Coast</option>
+                    <option value="Kingaroy">Kingaroy</option>
+                    <option value="Hervey Bay">Hervey Bay</option>
+                </select>
+            </div>
+
+            <!-- Location (if Sunshine Coast) -->
+            <div id="locationGroup" class="form-group" style="display: none;">
+                <label class="form-label">Location</label>
+                <select id="location" name="location" class="form-select">
+                    <option value="">Select location...</option>
+                    <option value="Maroochydore">Maroochydore</option>
+                    <option value="Caloundra">Caloundra</option>
+                </select>
+            </div>
+
+            <!-- Brand -->
+            <div id="brandGroup" class="form-group" style="display: none;">
+                <label class="form-label">Brand</label>
+                <select id="brand" name="brand" class="form-select" required>
+                    <option value="">Select brand...</option>
+                </select>
+            </div>
+
+            <!-- Vehicle Details (shown after brand selection) -->
+            <div id="vehicleDetails" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">Stock Number</label>
+                    <input type="text" name="stockNumber" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Vehicle Description (Brand, Model, Spec)</label>
+                    <input type="text" name="vehicleDescription" class="form-input" required>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Build & Compliance</label>
+                        <input type="text" name="buildCompliance" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Kilometres</label>
+                        <input type="number" name="kilometres" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Time in Stock</label>
+                    <input type="text" name="timeInStock" class="form-input" required>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Feature 1</label>
+                        <input type="text" name="feature1" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Feature 2</label>
+                        <input type="text" name="feature2" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Feature 3</label>
+                        <input type="text" name="feature3" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Feature 4</label>
+                        <input type="text" name="feature4" class="form-input">
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Was Price</label>
+                        <input type="text" name="wasPrice" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Now Price</label>
+                        <input type="text" name="nowPrice" class="form-input">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Call to Action / ARMS</label>
+                    <textarea name="callToAction" class="form-textarea" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full">Submit</button>
+            </div>
+        </form>
+
+        <!-- Data Management Section -->
+        <div class="mt-8 space-y-4">
+            <h2 class="text-xl font-bold">Data Management</h2>
+            <div class="flex flex-col sm:flex-row gap-2">
+                <button id="exportBtn" class="btn btn-success">Export to CSV</button>
+                <button id="clearBtn" class="btn btn-secondary">Clear All Data</button>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div id="dataTable" class="data-table" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Region</th>
+                        <th>Location</th>
+                        <th>Brand</th>
+                        <th>Stock #</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Brand configurations
+        const BRANDS = {
+            'Maroochydore': ['Audi', 'Volvo', 'MG', 'LDV', 'Cupra', 'Hyundai', 'Nissan', 'GMSV', 'Used', 'Mahindra', 'Polaris', 'Jeep', 'IM by MG', 'Chery', 'Polestar', 'Leapmotor'],
+            'Caloundra': ['Hyundai', 'Nissan', 'LDV', 'MG', 'Chery', 'Used'],
+            'Kingaroy': ['Ford', 'Hyundai', 'Nissan', 'GWM', 'Mitsubishi', 'Used'],
+            'Hervey Bay': ['Nissan', 'GWM', 'Isuzu', 'Kia', 'Mahindra', 'Honda', 'Used']
+        };
+
+        // DOM elements
+        const form = document.getElementById('dealershipForm');
+        const regionSelect = document.getElementById('region');
+        const locationGroup = document.getElementById('locationGroup');
+        const locationSelect = document.getElementById('location');
+        const brandGroup = document.getElementById('brandGroup');
+        const brandSelect = document.getElementById('brand');
+        const vehicleDetails = document.getElementById('vehicleDetails');
+        const successMessage = document.getElementById('successMessage');
+        const exportBtn = document.getElementById('exportBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const dataTable = document.getElementById('dataTable');
+        const dataTableBody = document.getElementById('dataTableBody');
+
+        // Event listeners
+        regionSelect.addEventListener('change', handleRegionChange);
+        locationSelect.addEventListener('change', handleLocationChange);
+        brandSelect.addEventListener('change', handleBrandChange);
+        form.addEventListener('submit', handleSubmit);
+        exportBtn.addEventListener('click', exportToCSV);
+        clearBtn.addEventListener('click', clearAllData);
+
+        // Load existing data on page load
+        loadData();
+        updateDataTable();
+
+        function handleRegionChange() {
+            const region = regionSelect.value;
+            
+            // Reset dependent fields
+            locationSelect.value = '';
+            brandSelect.value = '';
+            brandGroup.style.display = 'none';
+            vehicleDetails.style.display = 'none';
+            
+            if (region === 'Sunshine Coast') {
+                locationGroup.style.display = 'block';
+            } else if (region) {
+                locationGroup.style.display = 'none';
+                showBrandOptions(region);
+            } else {
+                locationGroup.style.display = 'none';
+            }
+        }
+
+        function handleLocationChange() {
+            const location = locationSelect.value;
+            if (location) {
+                showBrandOptions(location);
+            } else {
+                brandGroup.style.display = 'none';
+                vehicleDetails.style.display = 'none';
+            }
+        }
+
+        function handleBrandChange() {
+            if (brandSelect.value) {
+                vehicleDetails.style.display = 'block';
+            } else {
+                vehicleDetails.style.display = 'none';
+            }
+        }
+
+        function showBrandOptions(location) {
+            const brands = BRANDS[location] || [];
+            brandSelect.innerHTML = '<option value="">Select brand...</option>';
+            brands.forEach(brand => {
+                const option = document.createElement('option');
+                option.value = brand;
+                option.textContent = brand;
+                brandSelect.appendChild(option);
+            });
+            brandGroup.style.display = 'block';
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const data = {
+                id: Date.now(),
+                date: new Date().toLocaleString(),
+                region: formData.get('region'),
+                location: formData.get('location') || '',
+                brand: formData.get('brand'),
+                stockNumber: formData.get('stockNumber'),
+                vehicleDescription: formData.get('vehicleDescription'),
+                buildCompliance: formData.get('buildCompliance'),
+                kilometres: formData.get('kilometres'),
+                timeInStock: formData.get('timeInStock'),
+                feature1: formData.get('feature1'),
+                feature2: formData.get('feature2'),
+                feature3: formData.get('feature3'),
+                feature4: formData.get('feature4'),
+                wasPrice: formData.get('wasPrice'),
+                nowPrice: formData.get('nowPrice'),
+                callToAction: formData.get('callToAction')
+            };
+
+            // Save to localStorage
+            saveData(data);
+            
+            // Show success message
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+
+            // Reset form
+            form.reset();
+            locationGroup.style.display = 'none';
+            brandGroup.style.display = 'none';
+            vehicleDetails.style.display = 'none';
+
+            // Update data table
+            updateDataTable();
+        }
+
+        function saveData(data) {
+            const existingData = JSON.parse(localStorage.getItem('dealershipData') || '[]');
+            existingData.push(data);
+            localStorage.setItem('dealershipData', JSON.stringify(existingData));
+        }
+
+        function loadData() {
+            return JSON.parse(localStorage.getItem('dealershipData') || '[]');
+        }
+
+        function updateDataTable() {
+            const data = loadData();
+            if (data.length > 0) {
+                dataTable.style.display = 'block';
+                dataTableBody.innerHTML = '';
+                
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.date}</td>
+                        <td>${item.region}</td>
+                        <td>${item.location}</td>
+                        <td>${item.brand}</td>
+                        <td>${item.stockNumber}</td>
+                        <td>${item.vehicleDescription}</td>
+                        <td>${item.nowPrice || item.wasPrice || ''}</td>
+                    `;
+                    dataTableBody.appendChild(row);
+                });
+            } else {
+                dataTable.style.display = 'none';
+            }
+        }
+
+        function exportToCSV() {
+            const data = loadData();
+            if (data.length === 0) {
+                alert('No data to export!');
+                return;
+            }
+
+            const headers = [
+                'Date', 'Region', 'Location', 'Brand', 'Stock Number', 
+                'Vehicle Description', 'Build & Compliance', 'Kilometres', 
+                'Time in Stock', 'Feature 1', 'Feature 2', 'Feature 3', 'Feature 4',
+                'Was Price', 'Now Price', 'Call to Action'
+            ];
+
+            const csvContent = [
+                headers.join(','),
+                ...data.map(item => [
+                    `"${item.date}"`,
+                    `"${item.region}"`,
+                    `"${item.location}"`,
+                    `"${item.brand}"`,
+                    `"${item.stockNumber}"`,
+                    `"${item.vehicleDescription}"`,
+                    `"${item.buildCompliance}"`,
+                    `"${item.kilometres}"`,
+                    `"${item.timeInStock}"`,
+                    `"${item.feature1}"`,
+                    `"${item.feature2}"`,
+                    `"${item.feature3}"`,
+                    `"${item.feature4}"`,
+                    `"${item.wasPrice}"`,
+                    `"${item.nowPrice}"`,
+                    `"${item.callToAction}"`
+                ].join(','))
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `dealership_data_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all data? This cannot be undone.')) {
+                localStorage.removeItem('dealershipData');
+                updateDataTable();
+                alert('All data has been cleared!');
+            }
+        }
+    </script>
+</body>
+</html> 

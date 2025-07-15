@@ -1,46 +1,55 @@
-# Getting Started with Create React App
+# Dealership Radio Ad Data Collection
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple HTML website for collecting dealership radio ad data with local storage and CSV export functionality.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Dynamic Form**: Region-based dropdowns for dealership locations and brands
+- **Local Storage**: Data is saved locally in the browser
+- **CSV Export**: Export all collected data to CSV format
+- **Mobile-Friendly**: Responsive design that works on all devices
+- **Data Table**: View all submitted entries in a table format
 
-### `npm start`
+## Supported Regions and Brands
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Sunshine Coast
+- **Maroochydore**: Audi, Volvo, MG, LDV, Cupra, Hyundai, Nissan, GMSV, Used, Mahindra, Polaris, Jeep, IM by MG, Chery, Polestar, Leapmotor
+- **Caloundra**: Hyundai, Nissan, LDV, MG, Chery, Used
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Kingaroy
+- **Brands**: Ford, Hyundai, Nissan, GWM, Mitsubishi, Used
 
-### `npm test`
+### Hervey Bay
+- **Brands**: Nissan, GWM, Isuzu, Kia, Mahindra, Honda, Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+1. Open `index.html` in any modern web browser
+2. Fill out the form with dealership radio ad data
+3. Submit the form to save data locally
+4. Use "Export to CSV" to download all data
+5. Use "Clear All Data" to reset the local storage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This is a static HTML website that can be deployed on any web hosting service:
+- GitHub Pages
+- Netlify
+- Vercel
+- Render
+- Any web server
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Simply upload the `index.html` file to your hosting service.
 
-### `npm run eject`
+## Data Fields
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Region and Location
+- Brand selection
+- Stock Number
+- Vehicle Description
+- Build & Compliance
+- Kilometres
+- Time in Stock
+- 4 Feature fields
+- Was Price / Now Price
+- Call to Action / ARMS
