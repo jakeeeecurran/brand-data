@@ -3,170 +3,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dealership Data Dashboard</title>
+    <title>Sunco Motors - Data Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .parallax-bg {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 25%, #ffd700 50%, #ffa500 75%, #ff8c00 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
         .dashboard-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
         }
-        .stats-card {
-            background: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+        .dashboard-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
         }
-        .filter-section {
-            background: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
+
+        .dashboard-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+            font-weight: 700;
             margin-bottom: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-        .data-table {
-            background: white;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+        .brand-completion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
-        .data-table table {
-            width: 100%;
-            border-collapse: collapse;
+
+        .region-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .data-table th, .data-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
+
+        .region-title {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
         }
-        .data-table th {
-            background-color: #f9fafb;
+
+        .location-title {
+            color: #374151;
+            font-size: 1.1rem;
             font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-align: center;
         }
-        .data-table tr:hover {
-            background-color: #f9fafb;
+
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
         }
+
+        .brand-card {
+            padding: 0.75rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-card.completed {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            transform: scale(1.05);
+        }
+
+        .brand-card.completed:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .brand-card.pending {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .brand-card.pending:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+
+        .brand-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .brand-card:hover::before {
+            left: 100%;
+        }
+
+        .completion-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff6b35;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .btn {
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.15s ease-in-out;
+            transition: all 0.3s ease;
             border: none;
             text-decoration: none;
             display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
         }
+
         .btn-primary {
-            background-color: #3b82f6;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
             color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
+
         .btn-primary:hover {
-            background-color: #2563eb;
+            background: linear-gradient(135deg, #e55a2b 0%, #e0851a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
         }
+
         .btn-secondary {
-            background-color: #6b7280;
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
             color: white;
         }
+
         .btn-secondary:hover {
-            background-color: #4b5563;
+            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
+            transform: translateY(-2px);
         }
+
         .form-select {
-            padding: 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
         }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+        }
+
         .chart-container {
-            background: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             margin-bottom: 1.5rem;
         }
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+
+        .chart-title {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
         }
+
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
         }
+
         @media (max-width: 768px) {
             .grid-2 {
                 grid-template-columns: 1fr;
             }
         }
+
+        .data-table {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th, .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        .data-table tr:hover {
+            background-color: rgba(255, 107, 53, 0.05);
+        }
+
+        .floating-header {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="parallax-bg min-h-screen">
     <div class="dashboard-container">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold">Dealership Data Dashboard</h1>
-            <a href="index.html" class="btn btn-primary">Back to Form</a>
+        <div class="flex justify-between items-center mb-8 floating-header">
+            <div>
+                <h1 class="text-4xl font-bold text-white mb-2">Sunco Motors</h1>
+                <p class="text-xl text-white opacity-90">Data Dashboard</p>
+            </div>
+            <a href="index.html" class="btn btn-primary">
+                📝 Back to Form
+            </a>
         </div>
 
         <!-- Brand Completion Status -->
-        <div class="filter-section">
-            <h2 class="text-xl font-bold mb-4">Brand Completion Status - Current Month</h2>
+        <div class="dashboard-section">
+            <h2 class="section-title">🎯 Brand Completion Status - Current Month</h2>
             <div id="brandCompletionStatus">
                 <!-- Will be populated by JavaScript -->
             </div>
         </div>
 
         <!-- Filters -->
-        <div class="filter-section">
-            <h2 class="text-xl font-bold mb-4">Filters</h2>
-            <div class="grid-2">
+        <div class="dashboard-section">
+            <h2 class="section-title">🔍 Data Filters</h2>
+            <div class="filter-grid">
                 <div>
-                    <label class="block text-sm font-medium mb-2">Month</label>
+                    <label class="block text-sm font-medium mb-2 text-gray-700">Month</label>
                     <select id="monthFilter" class="form-select w-full">
                         <option value="">All Months</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium mb-2">Brand</label>
+                    <label class="block text-sm font-medium mb-2 text-gray-700">Brand</label>
                     <select id="brandFilter" class="form-select w-full">
                         <option value="">All Brands</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium mb-2">Region</label>
+                    <label class="block text-sm font-medium mb-2 text-gray-700">Region</label>
                     <select id="regionFilter" class="form-select w-full">
                         <option value="">All Regions</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium mb-2">Location</label>
+                    <label class="block text-sm font-medium mb-2 text-gray-700">Location</label>
                     <select id="locationFilter" class="form-select w-full">
                         <option value="">All Locations</option>
                     </select>
                 </div>
             </div>
             <div class="mt-4">
-                <button id="clearFilters" class="btn btn-secondary">Clear Filters</button>
+                <button id="clearFilters" class="btn btn-secondary">Clear All Filters</button>
             </div>
         </div>
 
         <!-- Charts -->
         <div class="grid-2">
             <div class="chart-container">
-                <h3 class="text-lg font-semibold mb-4">Entries by Brand</h3>
+                <h3 class="chart-title">📊 Entries by Brand</h3>
                 <canvas id="brandChart" width="400" height="200"></canvas>
             </div>
             <div class="chart-container">
-                <h3 class="text-lg font-semibold mb-4">Entries by Month</h3>
+                <h3 class="chart-title">📈 Entries by Month</h3>
                 <canvas id="monthChart" width="400" height="200"></canvas>
             </div>
         </div>
 
         <!-- Data Table -->
         <div class="data-table">
-            <div class="p-4 border-b">
-                <h3 class="text-lg font-semibold">All Data</h3>
-                <p id="tableInfo" class="text-sm text-gray-600">Showing all entries</p>
+            <div class="p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">📋 All Data</h3>
+                <p id="tableInfo" class="text-sm text-gray-600 mt-1">Showing all entries</p>
             </div>
             <table>
                 <thead>
@@ -242,55 +455,87 @@
             const statusContainer = document.getElementById('brandCompletionStatus');
             statusContainer.innerHTML = '';
 
+            // Add completion stats
+            const totalBrands = Object.values(allBrands).reduce((total, region) => {
+                if (typeof region === 'object' && !Array.isArray(region)) {
+                    return total + Object.values(region).reduce((sum, brands) => sum + brands.length, 0);
+                }
+                return total + region.length;
+            }, 0);
+
+            const completionRate = totalBrands > 0 ? (completedBrands.length / totalBrands * 100).toFixed(1) : 0;
+
+            const statsHtml = `
+                <div class="completion-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">${completedBrands.length}</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">${totalBrands - completedBrands.length}</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">${completionRate}%</div>
+                        <div class="stat-label">Completion Rate</div>
+                    </div>
+                </div>
+            `;
+            statusContainer.innerHTML = statsHtml;
+
+            // Create brand completion grid
+            const completionGrid = document.createElement('div');
+            completionGrid.className = 'brand-completion-grid';
+
             // Create sections for each region
             Object.keys(allBrands).forEach(region => {
-                const regionSection = document.createElement('div');
-                regionSection.className = 'mb-6';
-                regionSection.innerHTML = `<h3 class="text-lg font-semibold mb-3 text-gray-800">${region}</h3>`;
+                const regionCard = document.createElement('div');
+                regionCard.className = 'region-card';
+                regionCard.innerHTML = `<h3 class="region-title">${region}</h3>`;
 
                 if (typeof allBrands[region] === 'object' && !Array.isArray(allBrands[region])) {
                     // Sunshine Coast with locations
                     Object.keys(allBrands[region]).forEach(location => {
                         const locationBrands = allBrands[region][location];
                         const locationSection = document.createElement('div');
-                        locationSection.className = 'ml-4 mb-4';
-                        locationSection.innerHTML = `<h4 class="text-md font-medium mb-2 text-gray-700">${location}</h4>`;
+                        locationSection.className = 'mb-4';
+                        locationSection.innerHTML = `<h4 class="location-title">${location}</h4>`;
                         
                         const brandsGrid = document.createElement('div');
-                        brandsGrid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2';
+                        brandsGrid.className = 'brand-grid';
                         
                         locationBrands.forEach(brand => {
                             const isCompleted = completedBrands.includes(brand);
                             const brandCard = document.createElement('div');
-                            brandCard.className = `p-2 rounded text-sm font-medium ${isCompleted ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+                            brandCard.className = `brand-card ${isCompleted ? 'completed' : 'pending'}`;
                             brandCard.textContent = brand;
                             brandsGrid.appendChild(brandCard);
                         });
                         
                         locationSection.appendChild(brandsGrid);
-                        regionSection.appendChild(locationSection);
+                        regionCard.appendChild(locationSection);
                     });
                 } else {
                     // Other regions (Kingaroy, Hervey Bay)
                     const brandsGrid = document.createElement('div');
-                    brandsGrid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2';
+                    brandsGrid.className = 'brand-grid';
                     
                     allBrands[region].forEach(brand => {
                         const isCompleted = completedBrands.includes(brand);
                         const brandCard = document.createElement('div');
-                        brandCard.className = `p-2 rounded text-sm font-medium ${isCompleted ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+                        brandCard.className = `brand-card ${isCompleted ? 'completed' : 'pending'}`;
                         brandCard.textContent = brand;
                         brandsGrid.appendChild(brandCard);
                     });
                     
-                    regionSection.appendChild(brandsGrid);
+                    regionCard.appendChild(brandsGrid);
                 }
 
-                statusContainer.appendChild(regionSection);
+                completionGrid.appendChild(regionCard);
             });
+
+            statusContainer.appendChild(completionGrid);
         }
-
-
 
         function setupFilters() {
             const months = [...new Set(allData.map(item => {
@@ -382,7 +627,7 @@
                     <td>${item.compliance || '-'}</td>
                     <td>$${wasPrice.toFixed(2)}</td>
                     <td>$${nowPrice.toFixed(2)}</td>
-                    <td class="${savings > 0 ? 'text-green-600' : 'text-gray-600'}">$${savings.toFixed(2)}</td>
+                    <td class="${savings > 0 ? 'text-green-600 font-semibold' : 'text-gray-600'}">$${savings.toFixed(2)}</td>
                     <td>${features || '-'}</td>
                 `;
                 tbody.appendChild(row);
@@ -399,16 +644,41 @@
                     datasets: [{
                         label: 'Entries',
                         data: [],
-                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                        borderColor: 'rgba(59, 130, 246, 1)',
-                        borderWidth: 1
+                        backgroundColor: 'rgba(255, 107, 53, 0.8)',
+                        borderColor: 'rgba(255, 107, 53, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8
                     }]
                 },
                 options: {
                     responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#374151',
+                                font: {
+                                    weight: '600'
+                                }
+                            }
+                        }
+                    },
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            ticks: {
+                                color: '#6b7280'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            ticks: {
+                                color: '#6b7280'
+                            }
                         }
                     }
                 }
@@ -423,17 +693,42 @@
                     datasets: [{
                         label: 'Entries',
                         data: [],
-                        borderColor: 'rgba(16, 185, 129, 1)',
-                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                        borderWidth: 2,
-                        fill: true
+                        borderColor: 'rgba(255, 107, 53, 1)',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
                     }]
                 },
                 options: {
                     responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#374151',
+                                font: {
+                                    weight: '600'
+                                }
+                            }
+                        }
+                    },
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            ticks: {
+                                color: '#6b7280'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            ticks: {
+                                color: '#6b7280'
+                            }
                         }
                     }
                 }
