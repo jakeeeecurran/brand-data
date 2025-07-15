@@ -147,19 +147,35 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Vehicle Description (Brand, Model, Spec)</label>
-                    <input type="text" name="vehicleDescription" class="form-input" required>
+                    <label class="form-label">Brand</label>
+                    <input type="text" name="brandInput" id="brandInput" class="form-input" readonly style="background-color: #f3f4f6;">
                 </div>
 
                 <div class="grid-2">
                     <div class="form-group">
-                        <label class="form-label">Build & Compliance</label>
-                        <input type="text" name="buildCompliance" class="form-input" required>
+                        <label class="form-label">Model</label>
+                        <input type="text" name="model" class="form-input" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Kilometres</label>
-                        <input type="number" name="kilometres" class="form-input" required>
+                        <label class="form-label">Spec</label>
+                        <input type="text" name="spec" class="form-input" required>
                     </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Build</label>
+                        <input type="text" name="build" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Compliance</label>
+                        <input type="text" name="compliance" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Kilometres</label>
+                    <input type="number" name="kilometres" class="form-input" required>
                 </div>
 
                 <div class="form-group">
@@ -266,6 +282,7 @@
         const wasPriceInput = document.getElementById('wasPrice');
         const nowPriceInput = document.getElementById('nowPrice');
         const savingsInput = document.getElementById('savings');
+        const brandInput = document.getElementById('brandInput');
 
         // Event listeners
         regionSelect.addEventListener('change', handleRegionChange);
@@ -312,8 +329,10 @@
 
         function handleBrandChange() {
             if (brandSelect.value) {
+                brandInput.value = brandSelect.value;
                 vehicleDetails.style.display = 'block';
             } else {
+                brandInput.value = '';
                 vehicleDetails.style.display = 'none';
             }
         }
@@ -341,8 +360,10 @@
                 location: formData.get('location') || '',
                 brand: formData.get('brand'),
                 stockNumber: formData.get('stockNumber'),
-                vehicleDescription: formData.get('vehicleDescription'),
-                buildCompliance: formData.get('buildCompliance'),
+                model: formData.get('model'),
+                spec: formData.get('spec'),
+                build: formData.get('build'),
+                compliance: formData.get('compliance'),
                 kilometres: formData.get('kilometres'),
                 timeInStock: formData.get('timeInStock'),
                 feature1: formData.get('feature1'),
@@ -416,7 +437,7 @@
 
             const headers = [
                 'Date', 'Region', 'Location', 'Brand', 'Stock Number', 
-                'Vehicle Description', 'Build & Compliance', 'Kilometres', 
+                'Model', 'Spec', 'Build', 'Compliance', 'Kilometres', 
                 'Time in Stock', 'Feature 1', 'Feature 2', 'Feature 3', 'Feature 4',
                 'Was Price', 'Now Price', 'Call to Action'
             ];
@@ -429,8 +450,10 @@
                     `"${item.location}"`,
                     `"${item.brand}"`,
                     `"${item.stockNumber}"`,
-                    `"${item.vehicleDescription}"`,
-                    `"${item.buildCompliance}"`,
+                    `"${item.model || ''}"`,
+                    `"${item.spec || ''}"`,
+                    `"${item.build || ''}"`,
+                    `"${item.compliance || ''}"`,
                     `"${item.kilometres}"`,
                     `"${item.timeInStock}"`,
                     `"${item.feature1}"`,

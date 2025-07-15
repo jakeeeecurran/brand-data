@@ -108,23 +108,11 @@
             <a href="index.html" class="btn btn-primary">Back to Form</a>
         </div>
 
-        <!-- Statistics Cards -->
-        <div class="grid-3 mb-6">
-            <div class="stats-card">
-                <h3 class="text-lg font-semibold text-gray-700">Total Entries</h3>
-                <p id="totalEntries" class="text-3xl font-bold text-blue-600">0</p>
-            </div>
-            <div class="stats-card">
-                <h3 class="text-lg font-semibold text-gray-700">This Month</h3>
-                <p id="thisMonth" class="text-3xl font-bold text-green-600">0</p>
-            </div>
-            <div class="stats-card">
-                <h3 class="text-lg font-semibold text-gray-700">Total Savings</h3>
-                <p id="totalSavings" class="text-3xl font-bold text-purple-600">$0</p>
-            </div>
-            <div class="stats-card">
-                <h3 class="text-lg font-semibold text-gray-700">Avg. Savings</h3>
-                <p id="avgSavings" class="text-3xl font-bold text-orange-600">$0</p>
+        <!-- Brand Completion Status -->
+        <div class="filter-section">
+            <h2 class="text-xl font-bold mb-4">Brand Completion Status - Current Month</h2>
+            <div id="brandCompletionStatus">
+                <!-- Will be populated by JavaScript -->
             </div>
         </div>
 
@@ -188,7 +176,10 @@
                         <th>Location</th>
                         <th>Brand</th>
                         <th>Stock #</th>
-                        <th>Description</th>
+                        <th>Model</th>
+                        <th>Spec</th>
+                        <th>Build</th>
+                        <th>Compliance</th>
                         <th>Was Price</th>
                         <th>Now Price</th>
                         <th>Savings</th>
@@ -220,39 +211,86 @@
         }
 
         function updateDashboard() {
-            updateStats();
+            updateBrandCompletionStatus();
             updateTable();
             updateCharts();
         }
 
-        function updateStats() {
-            const totalEntries = allData.length;
-            const thisMonth = getCurrentMonthEntries();
-            const totalSavings = calculateTotalSavings();
-            const avgSavings = totalEntries > 0 ? totalSavings / totalEntries : 0;
-
-            document.getElementById('totalEntries').textContent = totalEntries;
-            document.getElementById('thisMonth').textContent = thisMonth;
-            document.getElementById('totalSavings').textContent = `$${totalSavings.toFixed(2)}`;
-            document.getElementById('avgSavings').textContent = `$${avgSavings.toFixed(2)}`;
-        }
-
-        function getCurrentMonthEntries() {
+        function updateBrandCompletionStatus() {
             const currentMonth = new Date().getMonth();
             const currentYear = new Date().getFullYear();
-            return allData.filter(item => {
+            
+            // Get current month data
+            const currentMonthData = allData.filter(item => {
                 const itemDate = new Date(item.date);
                 return itemDate.getMonth() === currentMonth && itemDate.getFullYear() === currentYear;
-            }).length;
+            });
+
+            // Define all possible brands by region/location
+            const allBrands = {
+                'Sunshine Coast': {
+                    'Maroochydore': ['Audi', 'Volvo', 'MG', 'LDV', 'Cupra', 'Hyundai', 'Nissan', 'GMSV', 'Used', 'Mahindra', 'Polaris', 'Jeep', 'IM by MG', 'Chery', 'Polestar', 'Leapmotor'],
+                    'Caloundra': ['Hyundai', 'Nissan', 'LDV', 'MG', 'Chery', 'Used']
+                },
+                'Kingaroy': ['Ford', 'Hyundai', 'Nissan', 'GWM', 'Mitsubishi', 'Used'],
+                'Hervey Bay': ['Nissan', 'GWM', 'Isuzu', 'Kia', 'Mahindra', 'Honda', 'Used']
+            };
+
+            // Get completed brands for current month
+            const completedBrands = [...new Set(currentMonthData.map(item => item.brand))];
+
+            const statusContainer = document.getElementById('brandCompletionStatus');
+            statusContainer.innerHTML = '';
+
+            // Create sections for each region
+            Object.keys(allBrands).forEach(region => {
+                const regionSection = document.createElement('div');
+                regionSection.className = 'mb-6';
+                regionSection.innerHTML = `<h3 class="text-lg font-semibold mb-3 text-gray-800">${region}</h3>`;
+
+                if (typeof allBrands[region] === 'object' && !Array.isArray(allBrands[region])) {
+                    // Sunshine Coast with locations
+                    Object.keys(allBrands[region]).forEach(location => {
+                        const locationBrands = allBrands[region][location];
+                        const locationSection = document.createElement('div');
+                        locationSection.className = 'ml-4 mb-4';
+                        locationSection.innerHTML = `<h4 class="text-md font-medium mb-2 text-gray-700">${location}</h4>`;
+                        
+                        const brandsGrid = document.createElement('div');
+                        brandsGrid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2';
+                        
+                        locationBrands.forEach(brand => {
+                            const isCompleted = completedBrands.includes(brand);
+                            const brandCard = document.createElement('div');
+                            brandCard.className = `p-2 rounded text-sm font-medium ${isCompleted ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+                            brandCard.textContent = brand;
+                            brandsGrid.appendChild(brandCard);
+                        });
+                        
+                        locationSection.appendChild(brandsGrid);
+                        regionSection.appendChild(locationSection);
+                    });
+                } else {
+                    // Other regions (Kingaroy, Hervey Bay)
+                    const brandsGrid = document.createElement('div');
+                    brandsGrid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2';
+                    
+                    allBrands[region].forEach(brand => {
+                        const isCompleted = completedBrands.includes(brand);
+                        const brandCard = document.createElement('div');
+                        brandCard.className = `p-2 rounded text-sm font-medium ${isCompleted ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+                        brandCard.textContent = brand;
+                        brandsGrid.appendChild(brandCard);
+                    });
+                    
+                    regionSection.appendChild(brandsGrid);
+                }
+
+                statusContainer.appendChild(regionSection);
+            });
         }
 
-        function calculateTotalSavings() {
-            return allData.reduce((total, item) => {
-                const wasPrice = parseFloat(item.wasPrice) || 0;
-                const nowPrice = parseFloat(item.nowPrice) || 0;
-                return total + (wasPrice - nowPrice);
-            }, 0);
-        }
+
 
         function setupFilters() {
             const months = [...new Set(allData.map(item => {
@@ -338,7 +376,10 @@
                     <td>${item.location || '-'}</td>
                     <td>${item.brand}</td>
                     <td>${item.stockNumber}</td>
-                    <td>${item.vehicleDescription}</td>
+                    <td>${item.model || '-'}</td>
+                    <td>${item.spec || '-'}</td>
+                    <td>${item.build || '-'}</td>
+                    <td>${item.compliance || '-'}</td>
                     <td>$${wasPrice.toFixed(2)}</td>
                     <td>$${nowPrice.toFixed(2)}</td>
                     <td class="${savings > 0 ? 'text-green-600' : 'text-gray-600'}">$${savings.toFixed(2)}</td>
